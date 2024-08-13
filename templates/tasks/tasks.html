@@ -1,0 +1,60 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} To-Do Lists {% endblock titulo %}
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="d-flex justify-content-center">
+    <div class="container text-center">
+
+        <h2 class="fw-bold mt-3">To-Do List de : {{ request.user.username | upper }}</h2>
+        <div>
+            <a type="button" class="btn btn-outline-primary" href="{% url 'create_task' %}">Crear tarea</a>
+        </div>
+        <div class="row justify-content-center my-3">
+            {% for task in tasks %}
+            <div class="col-sm-6 col-md-4">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header">Prioridad: <strong>{{ task.get_priority_display }}</strong></div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ task.title | upper }}</h4>
+                        {% if task.is_completed %}
+                        <p class="card-text"><i class="fa-regular fa-circle-check text-success fs-2"></i></p>
+                        {% else %}
+                        <p class="card-text"><i class="fa-regular fa-circle-xmark text-danger fs-2"></i></p>
+                        {% endif %}
+                        <small class="text-muted">Creada: {{ task.created_date | date:'d M Y' }}</small>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a class="btn btn-outline-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-primary"><i class="fa-regular fa-eye"></i></a>
+                            <a class="btn btn-outline-primary"><i class="fa-solid fa-trash-can"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Aun no tienes tareas</h4>
+                    <h6 class="card-subtitle mb-2 text-muted"><i class="fa-regular fa-face-frown"></i></h6>
+                    <p class="card-text">Aun no tienes tareas cargadas</p>
+                    <a href="{% url 'create_task' %}" class="card-link">Crear tu primera tarea</a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock contenido_principal %}

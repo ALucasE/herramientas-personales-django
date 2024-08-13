@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Etiquetas META -->
+    <!-- Indica la descripción de la página que aparece en buscadores. -->
+    <meta name="description" content="Un proyecto de Django con varias aplicaciones: Aplicación de contactos, Agenda personal, Aplicación de encuestas, Libro de recetas, Aplicación de notas y un To-Do List">
+    <!-- Lista de palabras clave separadas por comas. Google no la tiene en cuenta. -->
+    <meta name="keywords" content="contactos agenda_personal encuestas recetas notas To-Do_List">
+    <!-- Indica el nombre del autor de la página. -->
+    <meta name="author" content="Lucas Acosta">
+    <!-- Indica el nombre de la aplicación web. Debería usarse sólo si es una webapp. -->
+    <meta name="application-name" content="Herramientas Personales">
+    <!-- El navegador coloreará la barra de direcciones con el color hexadecimal -->
+    <meta name="theme-color" content="#2C5781">
+    {% load static %}
+    <!-- CSS Boostrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/superhero-bootstrap.css' %}">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/3682b977b2.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{% static 'img/tool-96.png' %}" type="image/x-icon">
+    <title>{% block titulo %} Bienvenido {% endblock titulo %} | Herramientas Personales</title>
+</head>
+
+<body>
+    <main class="container-fluid">
+        <!-- CONTENIDO PRINCIPAL -->
+        {% block contenido_principal %}
+        
+        {% endblock contenido_principal %}
+    </main>
+    <!-- CDN JS Boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

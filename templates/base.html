@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Etiquetas META -->
+    <!-- Indica la descripción de la página que aparece en buscadores. -->
+    <meta name="description" content="Un proyecto de Django con varias aplicaciones: Aplicación de contactos, Agenda personal, Aplicación de encuestas, Libro de recetas, Aplicación de notas y un To-Do List">
+    <!-- Lista de palabras clave separadas por comas. Google no la tiene en cuenta. -->
+    <meta name="keywords" content="contactos agenda_personal encuestas recetas notas To-Do_List">
+    <!-- Indica el nombre del autor de la página. -->
+    <meta name="author" content="Lucas Acosta">
+    <!-- Indica el nombre de la aplicación web. Debería usarse sólo si es una webapp. -->
+    <meta name="application-name" content="Herramientas Personales">
+    <!-- El navegador coloreará la barra de direcciones con el color hexadecimal -->
+    <meta name="theme-color" content="#2C5781">
+    {% load static %}
+    <!-- CSS Boostrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/superhero-bootstrap.css' %}">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/3682b977b2.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{% static 'img/tool-96.png' %}" type="image/x-icon">
+    <title>{% block titulo %} Bienvenido {% endblock titulo %} | Herramientas Personales</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand " href="{% url 'index' %}"><i class="fa-solid fa-screwdriver-wrench"></i></i></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'index' %}active{% endif %}" href="{% url 'index' %}">Home
+                      <span class="visually-hidden">(current)</span>
+                    </a>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'tasks' %}active{% endif %}" href="{% url 'tasks' %}">To-Do List</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'contact_list' %}active{% endif %}" href="">Contactos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'cookbook' %}active{% endif %}" href="">Recetas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'personal_planner' %}active{% endif %}" href="">Agenda</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'polls' %}active{% endif %}" href="">Encuestas</a>
+                  </li>
+                  {% endif %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if is_active == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contacto</a>
+                  </li>
+                </ul>
+                <div class="d-flex">
+                  <!-- <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Acciones</a>
+                      <div class="dropdown-menu me-5">
+                        <a class="dropdown-item" href="#">Iniciar Sesión</a>
+                        <a class="dropdown-item" href="#">Registrarse</a>
+                        <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                      </div>
+                    </li>
+                  </ul> -->
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-dark my-2 my-sm-0" href="{% url 'logout' %}">Cerrar Sesión</a>
+                  {% else %}
+                  <a class="btn btn-primary my-2 my-sm-0" href="{% url 'register' %}">Registrarse</a>
+                  <a class="btn btn-secondary my-2 my-sm-0" href="{% url 'login' %}">Iniciar Sesión</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <main class="container-fluid">
+      <!-- Mensajes del servidor -->
+      {% for message in messages %}
+      <div class="alert alert-dismissible alert-{{ message.tags }}">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          {{message}}
+      </div>
+      {% endfor %}
+      <!-- Mensajes del servidor -->
+        <!-- CONTENIDO PRINCIPAL -->
+        {% block contenido_principal %}
+        
+        {% endblock contenido_principal %}
+    </main>
+    <footer class="text-center">
+      <!-- Grid container -->
+      <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            data-mdb-ripple-init
+            class="btn btn-link btn-floating btn-lg text-body m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            target="_blank"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            data-mdb-ripple-init
+            class="btn btn-link btn-floating btn-lg text-body m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark".
+            target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+    
+          <!-- Linkedin -->
+          <a
+            data-mdb-ripple-init
+            class="btn btn-link btn-floating btn-lg text-body m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            target="_blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <!-- Github -->
+          <a
+            data-mdb-ripple-init
+            class="btn btn-link btn-floating btn-lg text-body m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-body" href="https://github.com/ALucasE/" target="_blank">AlucasE</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- CDN JS Boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
