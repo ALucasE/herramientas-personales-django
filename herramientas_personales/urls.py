@@ -17,11 +17,20 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
+from django.shortcuts import render
 
 urlpatterns = [
     path('', include('core.urls')),
     path('accounts/', include('registration.urls')),
     path('contact/', include('contact.urls')),
     path('tasks/', include('tasks.urls')),
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls, name='admin'),
 ]
+
+# Vista personalizada para el error 404
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
+
+# Asigna la vista personalizada al manejador 404
+handler404 = custom_404_view

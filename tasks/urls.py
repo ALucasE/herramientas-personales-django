@@ -17,9 +17,12 @@ Including another URLconf
 
 
 from django.urls import path
-from .views import get_all_tasks, create_task
+from .views import task_create, task_edit, task_detail, tasks_get_all, task_delete
 
 urlpatterns = [
-    path('', get_all_tasks , name='tasks'),
-    path('create_task/', create_task , name='create_task'),
+    path('', tasks_get_all , name='tasks'),
+    path('task_create/', task_create , name='task_create'),
+    path('task_detail/<int:task_id>', task_detail , name='task_detail'),
+    path('task_edit/<int:task_id>', task_edit , name='task_edit'),
+    path('task_delete/<int:task_id>', task_delete , name='task_delete'),
 ]

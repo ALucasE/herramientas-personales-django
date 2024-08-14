@@ -1,0 +1,59 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} To-Do Lists {% endblock titulo %}
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="d-flex justify-content-center">
+    <div class="container ">
+
+        <div class="justify-content-center">
+
+            <div class="card text-center mt-4">
+                <div class="card-header">
+                    Prioridad: <strong>{{ task.get_priority_display }}</strong>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.title | upper }}</h5>
+                    <p class="card-text">
+                        Descipcion: {% if task.description == "" %} La nota no tiene descripcion {% endif %}{{ task.description }}
+                    </p>
+                    <p class="card-text">
+                        Estado: {% if task.is_completed %}
+                                    <strong class="text-success">Finalizada</strong>
+                                {% else %}
+                                    <strong class="text-warning">Pendiente</strong>
+                                {% endif %}
+                    </p>
+                    <p><small class="text-muted"> Ultima modificación: {{ task.updated_date|date:"d M Y h:m" }} </small></p>
+                    <div class="btn-group">
+                        <a class="btn btn-outline-primary" href="{% url 'task_edit' task.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="mx-3 btn {% if task.completed %}btn-outline-warning{% else %}btn-outline-success{% endif %}">
+                                {% if task.completed %}Marcar como pendiente{% else %}Marcar como completada{% endif %}
+                            </button>
+                        </form>
+                        <a class="btn btn-outline-primary" href="{% url 'task_delete' task.id %}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    Creada: {{ task.created_date | date:"d M Y" }}
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a type="button" class="btn btn-primary" href="{% url 'tasks' %}">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock contenido_principal %}

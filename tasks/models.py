@@ -23,14 +23,22 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Lista de tarea'
         verbose_name_plural = 'Listas de tareas'
-        ordering = ['title']
+        ordering = ['-created_date']
 
     def __str__(self):
         return self.title
     
     def is_completed(self):
         return self.completed
+    
+    def toggle_completion(self):
+        self.completed = not self.completed
+        self.save()
 
     @classmethod
-    def get_pending_tasks(cls):
-        return cls.objects.filter(completed=False)
+    def get_pending_tasks(cls, owner):
+        return cls.objects.filter(owner=owner ,completed=False)
+    
+    @classmethod
+    def get_completed_tasks(cls, owner):
+        return cls.objects.filter(owner=owner ,completed=True)

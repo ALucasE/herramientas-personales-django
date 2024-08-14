@@ -85,11 +85,13 @@
     <main class="container-fluid">
       <!-- Mensajes del servidor -->
       {% for message in messages %}
-      <div class="alert alert-dismissible alert-{{ message.tags }}">
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          {{message}}
+      <div class="d-flex justify-content-end">
+        <div class="alert alert-dismissible alert-{{ message.tags }}" style="max-width: 30rem;">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{message}}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
       <!-- Mensajes del servidor -->
         <!-- CONTENIDO PRINCIPAL -->
         {% block contenido_principal %}

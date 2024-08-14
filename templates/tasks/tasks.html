@@ -16,7 +16,22 @@
 
         <h2 class="fw-bold mt-3">To-Do List de : {{ request.user.username | upper }}</h2>
         <div>
-            <a type="button" class="btn btn-outline-primary" href="{% url 'create_task' %}">Crear tarea</a>
+            <a type="button" class="btn btn-outline-primary" href="{% url 'task_create' %}">Crear tarea</a>
+        </div>
+        <!-- FILTROS -->
+        <div class="btn-group my-3" role="group" aria-label="Filtros de Tareas">
+            <a href="{% url 'tasks' %}?filter=all"
+                class="btn btn-secondary {% if filter_by == 'all' %}active{% endif %}">
+                Todas
+            </a>
+            <a href="{% url 'tasks' %}?filter=pending"
+                class="btn btn-secondary {% if filter_by == 'pending' %}active{% endif %}">
+                Pendientes
+            </a>
+            <a href="{% url 'tasks' %}?filter=completed"
+                class="btn btn-secondary {% if filter_by == 'completed' %}active{% endif %}">
+                Completadas
+            </a>
         </div>
         <div class="row justify-content-center my-3">
             {% for task in tasks %}
@@ -34,9 +49,10 @@
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a class="btn btn-outline-primary"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a class="btn btn-outline-primary"><i class="fa-regular fa-eye"></i></a>
-                            <a class="btn btn-outline-primary"><i class="fa-solid fa-trash-can"></i></a>
+                            <a class="btn btn-outline-primary" href="{% url 'task_detail' task.id %}">
+                                <i class="fa-regular fa-eye"></i> Ver detalle
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -48,7 +64,7 @@
                     <h4 class="card-title">Aun no tienes tareas</h4>
                     <h6 class="card-subtitle mb-2 text-muted"><i class="fa-regular fa-face-frown"></i></h6>
                     <p class="card-text">Aun no tienes tareas cargadas</p>
-                    <a href="{% url 'create_task' %}" class="card-link">Crear tu primera tarea</a>
+                    <a href="{% url 'task_create' %}" class="card-link">Crear tu primera tarea</a>
                 </div>
             </div>
 
