@@ -100,12 +100,8 @@ def choice_create(request, pk):
     return render(request, 'polls/polls_form.html', contexto)
 
 
-class ResultsView(LoginRequiredMixin, generic.DetailView):
-    model = Poll
-    template_name = 'polls/poll_results.html'
 
-
-class VoteView(View):
+class VoteView(LoginRequiredMixin, View):
     def post(self, request, poll_id):
         poll = get_object_or_404(Poll, pk=poll_id)
         choice_id = request.POST.get('choice')
