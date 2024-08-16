@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import TaskForm
@@ -50,10 +50,11 @@ def task_create(request):
 @login_required
 def task_detail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         task.toggle_completion()
-        messages.add_message(request, messages.SUCCESS, 'Se actualizo el estado con exito!', extra_tags='success')
-        return redirect('task_detail', task_id=task.id)
+        messages.add_message(request, messages.SUCCESS, 'Se actualizó el estado con éxito!', extra_tags='success')
+        url_task_detail = reverse('task_detail', args=[task.id])
+        return redirect(url_task_detail)
     contexto = {'task': task}
     return render(request, 'tasks/task_detail.html', contexto)
 

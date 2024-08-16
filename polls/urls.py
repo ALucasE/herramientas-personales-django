@@ -1,4 +1,4 @@
-"""
+'''
 URL configuration for herramientas_personales project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,25 +13,19 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+'''
 
-from django.contrib import admin
-from django.urls import path, include
-from django.conf.urls import handler404
-from django.shortcuts import render
+
+from django.urls import path
+from .views import IndexView, poll_crerate,  DetailView, choice_create, ResultsView, VoteView, PollDeleteView
+
 
 urlpatterns = [
-    path('', include('core.urls')),
-    path('accounts/', include('registration.urls')),
-    path('contact/', include('contact.urls')),
-    path('tasks/', include('tasks.urls')),
-    path('polls/', include('polls.urls')),
-    path("admin/", admin.site.urls, name='admin'),
+    path('', IndexView.as_view(), name='polls'),
+    path('polls_create/', poll_crerate, name='polls_create'),
+    path('<int:pk>/choice_create/', choice_create, name='choice_create'),
+    path('<int:pk>/', DetailView.as_view(), name='poll_detail'),
+    path('<int:pk>/results/', ResultsView.as_view(), name='poll_results'),
+    path('<int:poll_id>/vote/', VoteView.as_view(), name='polls_vote'),
+    path('delete/<int:pk>/', PollDeleteView.as_view(), name='poll_delete'),
 ]
-
-# Vista personalizada para el error 404
-def custom_404_view(request, exception):
-    return render(request, '404.html', status=404)
-
-# Asigna la vista personalizada al manejador 404
-handler404 = custom_404_view

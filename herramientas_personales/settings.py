@@ -49,6 +49,7 @@ THIRD_APP = [
 OWN_APP = [
     'contact',
     'core',
+    'polls',
     'registration',
     'tasks',
 ]

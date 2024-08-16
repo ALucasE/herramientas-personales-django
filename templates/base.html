@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#2C5781">
     {% load static %}
     <!-- CSS Boostrap -->
-    <link rel="stylesheet" href="{% static 'bootstrap/css/superhero-bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superhero-bootstrap.css' %}">
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/3682b977b2.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{% static 'img/tool-96.png' %}" type="image/x-icon">
@@ -53,7 +53,7 @@
                     <a class="nav-link {% if is_active == 'personal_planner' %}active{% endif %}" href="">Agenda</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if is_active == 'polls' %}active{% endif %}" href="">Encuestas</a>
+                    <a class="nav-link {% if is_active == 'polls' %}active{% endif %}" href="{% url 'polls' %}">Encuestas</a>
                   </li>
                   {% endif %}
                   <li class="nav-item">
@@ -159,6 +159,6 @@
     </footer>
     <!-- CDN JS Boostrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

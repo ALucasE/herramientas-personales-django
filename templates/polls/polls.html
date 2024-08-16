@@ -1,0 +1,58 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} Encuestas {% endblock titulo %}
+
+<!-- ARCHIVOS ESTATICOS EXTRA -->
+{% block extra_css %}{% endblock extra_css %}
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="d-flex justify-content-center text-center">
+    <div class="text-center">
+        <h2 class="fw-bold mt-3">{{ accion }}</h2>
+        <form action="{% url 'polls_create' %}" method="post">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="Enviar" class="btn btn-success m-1">
+        </form>
+    </div>
+</div>
+<hr class="my-4">
+{% if polls %}
+<h2 class="text-center fw-bold">Todas las encuestas</h2>
+<div class="d-flex justify-content-center text-center">
+    <table class="table table-hover mt-1">
+        <thead>
+            <tr>
+                <th scope="col">Titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        {% for poll in polls %}
+        <tbody>
+            <td>{{ poll.title }}</td>
+            <td>{{ poll.creator|upper }}</td>
+            <td><a class="btn btn-outline-primary" href="{% url 'poll_detail' poll.id %}">
+                    <i class="fa-regular fa-eye"></i> Ver detalle</a>
+            </td>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<h3 class="fw-bold mt-3 text-center">Aun no se crearon encuentas</h3>
+{% endif %}
+<hr class="mt-4">
+
+{% endblock contenido_principal %}
+
+<!-- ARCHIVOS JS EXTRA -->
+{% block extra_js %}{% endblock extra_js %}
