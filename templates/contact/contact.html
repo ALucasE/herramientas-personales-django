@@ -12,84 +12,84 @@
 <!-- Mensajes del servidor -->
 {% for message in messages %}
 <div class="alert alert-dismissible alert-{{ message.tags }}">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  {{message}}
 </div>
 {% endfor %}
 <!-- Mensajes del servidor -->
 <h3 class="text-center mt-5">Formulario de Contacto</h3>
-<p class="fs-5 text-center px-5">Es un placer que puedas contactarnos. Nos pondremos en contacto contigo, en el menor
-    tiempo posible</p>
-<div class="row">
-    <div class="col-lg-6 col-sm-8 mb-5 mt-3">
-        <img class="float-start img-fluid" src={% static 'img/contact/email.jpeg' %} alt="Imagen de celular con acciones de contacto">
-    </div>
-    <div class="col-lg-6 col-sm-8">
-        <form action="" method="post">
-            {% csrf_token %}
-            <!-- MENSAJES DE ERROR DEL FORMULARIO -->
-            {% if contact_form.non_field_errors %}
-            <div class="alert alert-danger">
-                {{ contact_form.non_field_errors }}
-            </div>
-            {% endif %}
-            <div class="mb-3">
-                <label for="name" class="form-label">Nombres y apellidos</label>
-                {{ contact_form.name }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.name.errors %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Dirección de correo electronico</label>
-                {{ contact_form.email }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.email.errors %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <label for="confirm_email" class="form-label">Confirma la dirección de correo electronico</label>
-                {{ contact_form.confirm_email }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.confirm_email.errors %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <label for="confirm_email" class="form-label">Numero de telefono/celular</label>
-                {{ contact_form.phone }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.phone.errors %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Asunto</label>
-                {{ contact_form.subject }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.subject.errors %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Mensaje</label>
-                {{ contact_form.message }}
-                <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
-                {% for error in contact_form.subject.message %}
-                <li class="list-group-item text-danger">{{ error }}</li><br>
-                {% endfor %}
-            </div>
-            <div class="mb-3">
-                <input 
-                type="submit" 
-                class="btn btn-primary mb-3"
-                {% if 'ok' in request.GET %}disabled{% endif %}
-                {% if 'error' in request.GET %}disabled{% endif %}>
-            </input>
-            </div>
-        </form>
-    </div>
+<p class="fs-5 text-center px-5">Es un placer que puedas contactarnos. Nos pondremos en contacto contigo, en el
+  menor tiempo posible</p>
+<div class="row justify-content-evenly align-items-center">
+  <div class="col-md-12 col-lg-6 order-lg-0 order-md-1 order-1 mt-2 p-3">
+    <img class="float-start img-fluid" src={% static 'img/contact/email.jpeg' %}
+      alt="Imagen de celular con acciones de contacto">
+  </div>
+  <div class="col-md-12 col-lg-6 order-lg-1 order-md-0 order-1 mt-2 p-3">
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- MENSAJES DE ERROR DEL FORMULARIO -->
+      {% if contact_form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ contact_form.non_field_errors }}
+      </div>
+      {% endif %}
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombres y apellidos</label>
+        {{ contact_form.name }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.name.errors %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Dirección de correo electronico</label>
+        {{ contact_form.email }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.email.errors %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label for="confirm_email" class="form-label">Confirma la dirección de correo electronico</label>
+        {{ contact_form.confirm_email }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.confirm_email.errors %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label for="confirm_email" class="form-label">Numero de telefono/celular</label>
+        {{ contact_form.phone }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.phone.errors %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Asunto</label>
+        {{ contact_form.subject }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.subject.errors %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Mensaje</label>
+        {{ contact_form.message }}
+        <!-- AQUI LOS MENSAJES DE ERROR DEL FORMULARIO -->
+        {% for error in contact_form.subject.message %}
+        <li class="list-group-item text-danger">{{ error }}</li><br>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <input type="submit" 
+        class="btn btn-primary mb-3" 
+        {% if 'ok' in request.GET %}disabled{% endif %}
+        {% if 'error' in request.GET %}disabled{% endif %}>
+        </input>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock contenido_principal %}

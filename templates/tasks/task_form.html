@@ -12,16 +12,17 @@
 
 <!-- CONTENIDO PRINCIPAL -->
 {% block contenido_principal %}
-<div class="d-flex justify-content-center">
-    <div class="container text-center">
-        <h2 class="fw-bold mt-3">{{ accion }}</h2>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <input type="submit" value="Enviar" class="btn btn-success m-4">
-            <a href="{% url 'tasks' %}" class="btn btn-primary m-4">Volver</a>
-        </form>
-    </div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2 class="fw-bold mt-3 text-center">{{ accion }}</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <div class="btn-group d-flex justify-content-between">
+        <input type="submit" value="Enviar" class="btn btn-success m-4">
+        <a href="{% url 'tasks' %}" class="btn btn-primary m-4">Volver</a>
+      </div>
+    </form>
+  </div>
 </div>
-
 {% endblock contenido_principal %}
