@@ -1,0 +1,71 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} Contactos {% endblock titulo %}
+
+<!-- ARCHIVOS ESTATICOS EXTRA -->
+{% block extra_css %}{% endblock extra_css %}
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="row justify-content-center my-5">
+  <h2 class="fw-bold mt-3 text-center">Agenda personal de : {{ request.user.username | upper }}</h2>
+  <div class="col-md-6">
+    <form class="d-flex gap-2">
+      <a class="btn btn-secondary" href="{% url 'contact_create' %}"><i class="fa-solid fa-plus"></i></a>
+      <input class="form-control" type="search" placeholder="Buscar contacto..." spellcheck="false"
+        data-ms-editor="true" name="q" value="{{ request.GET.q }}">
+      <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  </div>
+</div>
+<div class="row justify-content-center my-5">
+  {% for contact in contacts %}
+
+  <div class="col-sm-6 col-md-3 col-lg-2 my-2">
+    <div class="card" style="min-height: 200px;">
+      <div class="card-body">
+        <h5 class="card-title"> {{ contact.get_full_name|upper }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ contact.phone }}</h6>
+        <p class="card-text">Grupo: <strong>{{ contact.group|capfirst }}</strong></p>
+        
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'contact_detail' contact.id %}" class="card-link">Detalle</a>
+      </div>
+    </div>
+  </div>
+
+  {% empty %}
+
+  <div class="col-md-6 col-lg-8 my-2">
+    <h3 class="text-center fs-4 fw-bold">Aun no agregaste ningun contacto!</h3>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row justify-content-end">
+  <div class="col-md-4">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-arrow-left"></i></a></li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fa-solid fa-arrow-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+{% endblock contenido_principal %}
+
+<!-- ARCHIVOS JS EXTRA -->
+{% block extra_js %}{% endblock extra_js %}

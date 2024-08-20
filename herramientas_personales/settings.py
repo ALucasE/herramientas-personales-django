@@ -48,6 +48,7 @@ THIRD_APP = [
 #Aqui las aplicaciones propias (Ordenar alfabeticamente)
 OWN_APP = [
     'contact',
+    'contact_list',
     'core',
     'polls',
     'registration',
