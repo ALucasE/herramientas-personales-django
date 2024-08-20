@@ -15,15 +15,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 '''
 
-
 from django.urls import path
-from .views import ContactListView, ContactCreateView, ContactDetailView, ContactDeleteView, ContactEditView
+from .views import (
+    ContactListView,
+    ContactCreateView,
+    ContactDetailView,
+    ContactDeleteView,
+    ContactEditView,
+    GroupListView,
+    TagListView,
+    TagCreateView,
+    GroupCreateView,
+    GroupDeleteView,
+    TagDeleteView,
+)
 
 
 urlpatterns = [
+    # Contactos
     path('', ContactListView.as_view(), name='contact_list'),
     path('create_contact/', ContactCreateView.as_view(), name='contact_create'),
     path('<int:pk>/', ContactDetailView.as_view(), name='contact_detail'),
     path('delete/<int:pk>/', ContactDeleteView.as_view(), name='contact_delete'),
     path('edit/<int:pk>/', ContactEditView.as_view(), name='contact_edit'),
+    # Grupos
+    path('groups/', GroupListView.as_view(), name='group_list'),
+    path('create_group/', GroupCreateView.as_view(), name='group_create'),
+    path('delete_group/<int:pk>', GroupDeleteView.as_view(), name='group_delete'),
+    # Etiquetas
+    path('tags/', TagListView.as_view(), name='tag_list'),
+    path('create_tag/', TagCreateView.as_view(), name='tag_create'),
+    path('delete_tag/<int:pk>', TagDeleteView.as_view(), name='tag_delete'),
 ]

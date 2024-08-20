@@ -3,14 +3,15 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from .models import Contact, Group
+from .models import Contact, Group, Tag
+from .forms import GroupForm, TagForm
 
 # Create your views here.
 class ContactListView(LoginRequiredMixin, ListView):
     model=Contact
     template_name = 'contact_list/contact_list.html'
     context_object_name = 'contacts'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(owner=self.request.user)
@@ -29,7 +30,7 @@ class ContactListView(LoginRequiredMixin, ListView):
 
 class ContactCreateView(LoginRequiredMixin, CreateView):
     model = Contact
-    fields = ['first_name', 'last_name', 'phone', 'email', 'address', 'birthdate', 'group']
+    fields = ['first_name', 'last_name', 'phone', 'email', 'address', 'birthdate', 'group',]
     template_name = 'contact_list/contact_form.html'
 
     success_url = reverse_lazy('contact_list')
@@ -69,3 +70,48 @@ class ContactEditView(LoginRequiredMixin, UpdateView):
 class ContactDeleteView(LoginRequiredMixin, DeleteView):
     model = Contact
     success_url = reverse_lazy('contact_list')
+
+
+class GroupListView(LoginRequiredMixin, ListView):
+    model=Group
+    template_name = 'contact_list/contact_group_list.html'
+    context_object_name = 'list'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Grupos'
+        context['form'] = GroupForm
+        return context
+
+
+class TagListView(LoginRequiredMixin, ListView):
+    model=Tag
+    template_name = 'contact_list/contact_tag_list.html'
+    context_object_name = 'list'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Etiquetas'
+        context['form'] = TagForm
+        return context
+
+
+class GroupCreateView(CreateView):
+    model=Group
+    form_class = GroupForm
+    success_url = reverse_lazy('group_list')
+
+class TagCreateView(CreateView):
+    model=Tag
+    form_class = TagForm
+    success_url = reverse_lazy('tag_list')
+
+
+class GroupDeleteView(LoginRequiredMixin, DeleteView):
+    model = Group
+    template_name = 'contact_list/contact_confirm_delete.html'
+    success_url = reverse_lazy('group_list')
+
+
+class TagDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tag
+    template_name = 'contact_list/contact_confirm_delete.html'
+    success_url = reverse_lazy('tag_list')

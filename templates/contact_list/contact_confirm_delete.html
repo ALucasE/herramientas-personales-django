@@ -8,7 +8,7 @@
         <div class="card-header"><i class="fa-solid fa-trash-can"></i> Confirmación</div>
         <div class="card-body">
             <form method="post">{% csrf_token %}
-                <p>Esta seguro que quiere eliminar "{{ object.get_full_name }}"?</p>
+                <p>Esta seguro que quiere eliminar "{{ object.get_full_name }} {{object.name}}"?</p>
                 <input type="submit" value="Confirmar" class="btn btn-danger">
             </form>
         </div>
