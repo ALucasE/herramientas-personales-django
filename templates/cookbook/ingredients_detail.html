@@ -1,0 +1,90 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} {{ recipe.title }} {% endblock titulo %}
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h3 class="fw-bold my-3">Lista de ingredientes de la receta: {{ recipe.title }}</h3>
+            </div>
+            <div>
+                <a type="button" class="btn btn-primary" href="{% url 'detail_recipe' recipe.id %}">Volver</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ingrediente</th>
+                    <th scope="col">Unidad</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in all_ingredients %}
+                <tr>
+                    <th scope="row">{{item.ingredient}}</th>
+                    <td>{{item.unit}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.notes}}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm me-2" href="{% url 'ingredient_detail_edit' item.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger btn-sm ms-2" href="{% url 'ingredient_detail_detele' item.id %}"><i class="fa-regular fa-trash-can"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+</div>
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+        <h5 class="fw-bold mt-3">Agregar detalles de ingredientes</h5>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="hidden" name="form_type" value="form">
+            <input type="submit" value="Guardar" class="btn btn-success">
+            
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div class="container">
+            <div class="row">
+                <form class="col-12" action="" method="POST">
+                    <h5 class="fw-bold mt-3">Agregar mas ingredientes a la lista</h5>
+                    {% csrf_token %}
+                    {{ form_ingredient | crispy }}
+                    <input type="hidden" name="form_type" value="form_ingredient">
+                    <input type="submit" value="Guardar" class="btn btn-success">
+                </form>
+                <form class="col-12" action="" method="POST">
+                    <h5 class="fw-bold mt-3">Agregar mas unidades a la lista</h5>
+                    {% csrf_token %}
+                    {{ form_unit | crispy }}
+                    <input type="hidden" name="form_type" value="form_unit">
+                    <input type="submit" value="Guardar" class="btn btn-success">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+</div>
+
+
+{% endblock contenido_principal %}

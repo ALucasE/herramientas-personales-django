@@ -57,7 +57,7 @@
                     </div>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if is_active == 'cookbook' %}active{% endif %}" href="">Recetas</a>
+                    <a class="nav-link {% if is_active == 'cookbook' %}active{% endif %}" href="{% url 'cookbook' %}">Recetas</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link {% if is_active == 'personal_planner' %}active{% endif %}" href="">Agenda</a>
@@ -170,5 +170,6 @@
     <!-- CDN JS Boostrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
 </body>
 </html>

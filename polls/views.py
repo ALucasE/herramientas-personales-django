@@ -75,8 +75,6 @@ def choice_create(request, pk):
         form = ChoiceForm(request.POST)
         choice = form.save(commit=False)
         choice.question_id = poll.id
-        print(f'poll.id: {poll.id}')
-        print(f'choice.question_id: {choice.question_id}')
         if form.is_valid():
             form.save()
             url_poll_detail = reverse('poll_detail', args=[pk])

@@ -1,0 +1,42 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} {{ title_page }} {% endblock titulo %}
+
+<!-- ARCHIVOS ESTATICOS EXTRA -->
+{% block extra_css %}{% endblock extra_css %}
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="row justify-content-center">
+  <h2 class="fw-bold mt-3 text-center">{{ title_page }} a {{ quality.recipe }}</h2>
+  <div class="col-md-8">
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form | crispy }}
+      {% if volver_detalle %}
+      <a href="{% url 'ingredient_detail' quality.recipe.id %}" class="btn btn-primary m-4">Volver</a>
+      {% else %}
+      <a href="{% url 'cookbook' %}" class="btn btn-primary m-4">Volver</a>
+      {% endif %}
+      
+      <input type="submit" value="Guardar" class="btn btn-success m-4">
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock contenido_principal %}
+
+<!-- ARCHIVOS JS EXTRA -->
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock extra_js %}

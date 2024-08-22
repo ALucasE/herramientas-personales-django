@@ -1,0 +1,63 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} {{ title }} {% endblock titulo %}
+
+<!-- ARCHIVOS ESTATICOS EXTRA -->
+{% block extra_css %}{% endblock extra_css %}
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="row justify-content-center mt-2">
+  <h2 class="fw-bold my-3 text-center">Recetas para Todos los Gustos</h2>
+  <div class="col-md-6 my-2">
+    <form class="d-flex gap-2">
+      <a class="btn btn-secondary" href="{% url 'create_recipe' %}"><i class="fa-solid fa-plus"></i></a>
+      <input class="form-control" type="search" placeholder="Buscar contacto..." spellcheck="false"
+        data-ms-editor="true" name="q" value="{{ request.GET.q }}">
+      <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  </div>
+</div>
+
+<div class="row justify-content-evenly">
+  <div class="col-md-8  mt-2 p-1">
+    {% if recipes %}
+    <div class="d-flex justify-content-center text-center">
+      <table class="table table-hover mt-1">
+        <thead>
+          <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        {% for recipe in recipes %}
+        <tbody>
+          <td>{{ recipe.title }}</td>
+          <td>{{ recipe.author|upper }}</td>
+          <td>{{ recipe.category|upper }}</td>
+          <td><a class="btn btn-secondary" href="{% url 'detail_recipe' recipe.id %}">
+            <i class="fa-regular fa-share-from-square fa-lg"></i> Detalle</a>
+          </td>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    {% else %}
+    <h3 class="fw-bold mt-3 text-center">Aun no se crearon encuentas</h3>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock contenido_principal %}
+
+<!-- ARCHIVOS JS EXTRA -->
+{% block extra_js %}{% endblock extra_js %}

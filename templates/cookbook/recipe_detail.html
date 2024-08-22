@@ -1,0 +1,59 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} {{ recipe.title }} {% endblock titulo %}
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <div class="card my-3">
+      <h3 class="card-header">{{ recipe.title }}</h3>
+      <div class="card-body">
+        <h5 class="card-title">Descripción:</h5>
+        <h6 class="card-subtitle text-muted">{{ recipe.description }}</h6>
+      </div>
+      <img src="{{ recipe.image.url }}" class="card-img-top p-3" alt="{{ recipe.description }}">
+      <div class="card-body">
+        <p class="card-text"> intrucciones: {{ recipe.instructions|safe }}</p>
+        <h5 class="card-title mt-3">Ingredientes:</h5>
+        <ul class="list-group list-group-flush">
+          {% for ingrediente in recipe.get_ingredients_with_quantities %}
+          <li class="list-group-item">{{ ingrediente.quantity }} {{ ingrediente.unit }} - {{ ingrediente.ingredient }}
+            {% if ingrediente.notes %}<small>Nota: </small><strong> {{ ingrediente.notes }}</strong>{% endif %}
+          </li>
+          {% empty %} 
+          <li class="list-group-item">Aun no agregaste un detalle de los ingredientes</li>
+          {% endfor %}
+          
+        </ul>
+        {% if recipe.author == request.user %}
+        <div class="card-body">
+          <a href="{% url 'ingredient_detail' recipe.id %}" class="card-link">Agregar y editar ingredientes</a>
+        </div>
+        {% endif %}
+        <div class="card-footer text-muted">
+          <li class="list-group-item">Autor: {{ recipe.author | upper }}</li>
+          <li class="list-group-item">Categoria: {{ recipe.category | upper }}</li>
+          <li class="list-group-item">Fecha de creación: {{ recipe.created_date | date:"d M Y" }}</li>
+        </div>
+      </div>
+      <div class="text-center my-3">
+        {% if recipe.author == request.user %}
+        <a type="button" class="btn btn-success me-5" href="{% url 'edit_recipe' recipe.id %}">Editar</a>
+        {% endif %}
+        <a type="button" class="btn btn-primary mx-5" href="{% url 'cookbook' %}">Volver</a>
+        {% if recipe.author == request.user %}
+        <a type="button" class="btn btn-danger ms-5" href="{% url 'delete_recipe' recipe.id %}">Eliminar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+  {% endblock contenido_principal %}

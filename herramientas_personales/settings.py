@@ -44,11 +44,14 @@ THIRD_APP = [
     #crispy-bootstrap5
     'crispy_forms',
     'crispy_bootstrap5',
+    #CKEditor
+    'ckeditor',
 ]
 #Aqui las aplicaciones propias (Ordenar alfabeticamente)
 OWN_APP = [
     'contact',
     'contact_list',
+    'cookbook',
     'core',
     'polls',
     'registration',
