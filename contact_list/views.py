@@ -11,7 +11,7 @@ class ContactListView(LoginRequiredMixin, ListView):
     model=Contact
     template_name = 'contact_list/contact_list.html'
     context_object_name = 'contacts'
-    paginate_by = 10
+    paginate_by = 8
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(owner=self.request.user)

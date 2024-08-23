@@ -17,7 +17,6 @@ Aplicaciones integradas:
 ![Boostrap](https://img.shields.io/badge/Boostrap-5.x-yellow)
 ![HTML](https://img.shields.io/badge/HTML-5-violet)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.x-orange)
-![MySQL](https://img.shields.io/badge/MySQL-5.x-blue)
 
 ## To-Do List
 - Una aplicación para gestionar listas de tareas pendientes.
@@ -62,7 +61,25 @@ Aplicaciones integradas:
 
 ### Capturas
 
+![Captura 01](/capturas/Captura-Herramientas-Personales%20(1).jpeg)
 
+![Captura 02](/capturas/Captura-Herramientas-Personales%20(32).jpeg)
+
+![Captura 03](/capturas/Captura-Herramientas-Personales%20(33).jpeg)
+
+![Captura 04](/capturas/Captura-Herramientas-Personales%20(40).jpeg)
+
+![Captura 05](/capturas/Captura-Herramientas-Personales%20(40).jpeg)
+
+![Captura 06](/capturas/Captura-Herramientas-Personales%20(43).jpeg)
+
+![Captura 07](/capturas/Captura-Herramientas-Personales%20(48).jpeg)
+
+![Captura 08](/capturas/Captura-Herramientas-Personales%20(56).jpeg)
+
+![Captura 09](/capturas/Captura-Herramientas-Personales%20(57).jpeg)
+
+![Vista desde celular](/capturas/Captura-Herramientas-Personales%20(35).jpeg)
 1. Clone the repository:
     ```sh
     https://github.com/ALucasE/herramientas-personales-django.git
