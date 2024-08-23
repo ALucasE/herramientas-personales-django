@@ -26,6 +26,7 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('contact_list/', include('contact_list.urls')),
     path('cookbook/', include('cookbook.urls')),
+    path('personal_planner/', include('personal_planner.urls')),
     path('polls/', include('polls.urls')),
     path('tasks/', include('tasks.urls')),
     path("admin/", admin.site.urls, name='admin'),

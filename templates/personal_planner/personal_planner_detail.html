@@ -1,0 +1,65 @@
+<!-- HERENCIA DE BASE -->
+{% extends "base.html" %}
+
+<!-- CARGA LOS ESTATICOS -->
+{% load static %}
+
+<!-- TITULO DINAMICO -->
+{% block titulo %} To-Do Lists {% endblock titulo %}
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+{% block contenido_principal %}
+<div class="d-flex justify-content-center">
+  <div class="container">
+    <div class="justify-content-center">
+      <div class="card text-center mt-4">
+        
+        <div class="card-body">
+          <h5 class="card-title">{{ object.title }}</h5>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Descripción:
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ object.description }}</span>
+              </li>
+              <hr>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Fecha y hora de incio
+                <span>{{ object.start_date }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Fecha y hora de finalización
+                <span>{{ object.end_date }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Localicación:
+                <span>{{ object.location }}</span>
+              </li><li class="list-group-item d-flex justify-content-between align-items-center">
+                Fecha de creación
+                <span>{{ object.created_date | date:"d M Y" }}</span>
+              </li></li><li class="list-group-item d-flex justify-content-between align-items-center">
+                Ultima modificación:
+                <span>{{ object.updated_date | date:"d M Y" }}</span>
+              </li>
+            </ul>
+          </p>
+        </div>
+        <div class="card-footer text-body-secondary">
+          <div class="btn-group gap-4">
+            <a class="btn btn-outline-primary" href="{% url 'personal_planner_edit' event.slug %}"><i
+                class="fa-regular fa-pen-to-square"></i></a>
+            <a class="btn btn-outline-primary" href="{% url 'personal_planner_delete' event.slug %}"><i
+                class="fa-solid fa-trash-can"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <a type="button" class="btn btn-primary" href="{% url 'personal_planner' %}">Volver</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido_principal %}

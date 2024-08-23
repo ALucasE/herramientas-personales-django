@@ -53,6 +53,7 @@ OWN_APP = [
     'contact_list',
     'cookbook',
     'core',
+    'personal_planner',
     'polls',
     'registration',
     'tasks',

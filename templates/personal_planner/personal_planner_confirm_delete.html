@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Confirmar eliminación {% endblock%}
+
+{% block contenido_principal %}
+<div class="d-flex flex-row justify-content-center alig-items-center mt-5">
+  <div class="card text-white bg-dark mb-3">
+    <div class="card-header"><i class="fa-solid fa-trash-can"></i> Confirmación</div>
+    <div class="card-body text-center">
+      <form method="post">{% csrf_token %}
+        <p>Esta seguro que quiere eliminar "{{object}}"?</p>
+        <input type="submit" value="Confirmar" class="btn btn-danger">
+      </form>
+    </div>
+    <a href="{% url 'personal_planner_detail' object.slug %}" class="btn btn-secondary">Volver</a>
+  </div>
+</div>
+{% endblock contenido_principal %}

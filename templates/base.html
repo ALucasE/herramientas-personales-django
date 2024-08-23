@@ -22,6 +22,8 @@
     <script src="https://kit.fontawesome.com/3682b977b2.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{% static 'img/tool-96.png' %}" type="image/x-icon">
     <title>{% block titulo %} Bienvenido {% endblock titulo %} | Herramientas Personales</title>
+    <!-- ARCHIVOS ESTATICOS EXTRA -->
+    {% block extra_css %}{% endblock extra_css %}
 </head>
 
 <body>
@@ -60,7 +62,7 @@
                     <a class="nav-link {% if is_active == 'cookbook' %}active{% endif %}" href="{% url 'cookbook' %}">Recetas</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if is_active == 'personal_planner' %}active{% endif %}" href="">Agenda</a>
+                    <a class="nav-link {% if is_active == 'personal_planner' %}active{% endif %}" href="{% url 'personal_planner' %}">Agenda</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link {% if is_active == 'polls' %}active{% endif %}" href="{% url 'polls' %}">Encuestas</a>
